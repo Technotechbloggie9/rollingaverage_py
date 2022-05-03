@@ -67,7 +67,7 @@ class Rolling_Average:
         Approximation of a rolling average, but with no simple average.
         """
         if(self.count > 1):
-            self.rolling = ((self.rolling * (self.count - 1)) + self.currentn)/self.count)/self.count
+            self.rolling = ((self.rolling * (self.count - 1)) + self.currentn))/self.count
         else:
             self.rolling = self.currentn
     def midrangeformula(self):
