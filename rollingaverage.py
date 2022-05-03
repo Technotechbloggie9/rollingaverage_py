@@ -14,7 +14,7 @@ Class Description:
     4. as a result it is not slowed by extended running.
     5. has no dependencies other than the standard python library
 Class Methods:
-    setdeviator - sets the deviator to adjust weighting
+    setdeviator - sets the deviator to adjust weighting (not currently used)
     update - the main function of the class, which updates the values calculated by the formulae
     rollingformula - used to calculate the rolling average
     getrolling -  used to return the calculated value of rolling
@@ -43,8 +43,8 @@ class Rolling_Average:
         deviator should be of value .99 to -.99
         """
         self.deviator = d
-        self.weight1 = 1 - self.deviator
-        self.weight2 = 1 + self.deviator
+        self.weight1 = self.weight1 - self.deviator
+        self.weight2 = self.weight2 + self.deviator
     def update(self, n):
         self.previousn = self.n
         self.n = n
@@ -67,7 +67,7 @@ class Rolling_Average:
         Approximation of a rolling average, but with no simple average.
         """
         if(self.count > 1):
-            self.rolling = (self.rolling/(self.divisor))*self.weight1 + (self.currentn/(self.divisor))*self.weight2
+            self.rolling = ((self.rolling * (self.count - 1)) + self.currentn)/self.count)/self.count
         else:
             self.rolling = self.currentn
     def midrangeformula(self):
@@ -87,7 +87,8 @@ class Rolling_Average:
         return stringvalue
 
         
-"""        
+"""
+#as a library this isn't needed, but it may be needed for testing purposes.
 def main():
     ra = Rolling_Average()
     uval = 0
@@ -102,44 +103,7 @@ def main():
         #print(ra.getcurrent())
 """
         
-"""
-Original Procedural Program... was converted to class. 
-    n = 0
-    count = 0
-    rolling = 0
-    maxn = 0
-    minn = 0
-    divisor = 2
-    midrange = 0
-    
-    deviate to current with positive deviator
-    deviate to past using negative deviator
-    deviator should be of value .99 to -.99
-    
-    deviator = .37
-    while(n >= 0):
-        if (count > 0):
-            print("the rolling estimate of average is: " + str(rolling))
-            print("midrange is: " + str(midrange))
-        count = count + 1
-        previousn = n
-        
-        n =  int(input("enter an integer/whole number, or negative number to exit: "))
-        currentn = n
-        if(currentn > maxn):
-            maxn = currentn
-        if (currentn < minn):
-            minn = currentn
-        if (count > 1):
-            weight1 = 1 - deviator
-            weight2 = 1 + deviator
-            rolling = (rolling/(divisor))*weight1 + (currentn/(divisor))*weight2
-            
-        else:
-            rolling = currentn
-            minn = currentn
-        midrange = (maxn+minn)/2
-      """  
+
 """
 if __name__ == "__main__":
     main()
