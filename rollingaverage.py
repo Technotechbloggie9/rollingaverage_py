@@ -35,7 +35,7 @@ class Rolling_Average:
         self.previousn = 0
         self.weight1 = 1
         self.weight2 = 1
-    def setdeviator(self, d):
+    def setdeviator(self, d = 0):
         """
         NOTE:
         deviate to current with positive deviator
@@ -52,6 +52,8 @@ class Rolling_Average:
         self.count = self.count + 1
         self.updatemin(n)
         self.updatemax(n)
+        self.weight1 = 1
+        self.weight2 = 1
         self.rollingformula()
         self.midrangeformula()
     def updatemin(self, n):
@@ -61,6 +63,9 @@ class Rolling_Average:
         if(n > self.maxn):
             self.maxn = n
     def rollingformula(self):
+        """
+        Approximation of a rolling average, but with no simple average.
+        """
         if(self.count > 1):
             self.rolling = (self.rolling/(self.divisor))*self.weight1 + (self.currentn/(self.divisor))*self.weight2
         else:
@@ -85,7 +90,6 @@ class Rolling_Average:
 """        
 def main():
     ra = Rolling_Average()
-    ra.setdeviator(.37)
     uval = 0
     while(uval >= 0):
         print(ra.getstring())
