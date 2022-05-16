@@ -22,6 +22,7 @@ NOTE:
     until update is called, getrolling & getmidrange return the value 0
 PENDING:
     future update will clarify how deviator works to produce an emulated exponential moving average
+    may need review to ensure that current formula is used in this file
 """    
 class Rolling_Average:
     def __init__(self):
