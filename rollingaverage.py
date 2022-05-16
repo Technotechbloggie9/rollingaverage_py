@@ -20,6 +20,8 @@ Class Methods:
     getrolling -  used to return the calculated value of rolling
 NOTE:
     until update is called, getrolling & getmidrange return the value 0
+PENDING:
+    future update will clarify how deviator works to produce an emulated exponential moving average
 """    
 class Rolling_Average:
     def __init__(self):
